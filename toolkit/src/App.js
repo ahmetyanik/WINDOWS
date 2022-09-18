@@ -1,23 +1,23 @@
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { addToDo, deleteToDo, artir } from "./redux/reducers/todoReducer";
+import { useEffect, useState } from "react";
+import { useToDo } from "./redux";
 
 function App() {
-  const { value } = useSelector((state) => state.todo);
-  const { counter } = useSelector((state) => state.todo);
   const [curValue, setCurValue] = useState("");
-  const dispatch = useDispatch();
+  
+  const { value,posts, addToDo, deleteToDo, getPosts } = useToDo();
 
-  console.log(value);
-
-  console.log(counter);
+  console.log(posts);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addToDo(curValue));
+    addToDo(curValue);
     setCurValue("");
   };
+
+  useEffect(()=>{
+    getPosts()
+  },[])
 
   return (
     <div className="App">
@@ -28,9 +28,7 @@ function App() {
       <ul>
         {value?.map((todo, i) => (
           <li key={`${todo}-{i}`}>
-            {todo}{" "}
-            <button onClick={() => dispatch(deleteToDo(todo))}>Delete</button>
-            <button onClick={() => dispatch(artir(todo))}>Artir</button>
+            {todo} <button onClick={() => deleteToDo(todo)}>Delete</button>
           </li>
         ))}
       </ul>
