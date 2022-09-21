@@ -7,7 +7,7 @@ function App() {
   
   const { value,posts, addToDo, deleteToDo, getPosts } = useToDo();
 
-  console.log(posts);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

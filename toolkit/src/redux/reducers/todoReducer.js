@@ -12,7 +12,6 @@ export const getPosts = createAsyncThunk("todo/getPosts",async()=>{
   .then(response=>response.json())
 })
 
-console.log(initialState);
 
 export const todoSlice = createSlice({
   name: "todo",
